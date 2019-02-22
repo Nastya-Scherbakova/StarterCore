@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace StarterCore.Controllers
 {
@@ -10,6 +12,13 @@ namespace StarterCore.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
+        public ValuesController(IMapper mapper, IMemoryCache memoryCache)
+        {
+            _mapper = mapper;
+            _memoryCache = memoryCache;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
